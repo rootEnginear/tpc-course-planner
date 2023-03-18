@@ -4,23 +4,24 @@ import RoomVis from "@/components/RoomVis";
 import { CourseName, COURSES, COURSE_NAME, RoomType } from "@/data/courses";
 import { PartialRecord } from "@/utils/partialrecord";
 
-type SelectedCourseDetail = { multiplier: number };
-type SelectedCourseData = PartialRecord<CourseName, SelectedCourseDetail>;
+type SelectedCourseData = PartialRecord<CourseName, number>;
 
 export default function Home() {
   const [currentSelectedCourse, setCurrentSelectedCourse] = useState<
     CourseName | undefined
   >("Academic Exercise");
+  const [currentMultiplier, setCurrentMultiplier] = useState(1);
 
   const [selectedCourse, setSelectedCourse] = useState<SelectedCourseData>({});
 
   const addCourse = () => {
     if (!currentSelectedCourse || availableList.length === 0) return;
 
-    setSelectedCourse((e) => ({ ...e, [currentSelectedCourse]: { multiplier: 1 } }));
+    setSelectedCourse((e) => ({ ...e, [currentSelectedCourse]: currentMultiplier }));
     setCurrentSelectedCourse(
       availableList.find((course) => course !== currentSelectedCourse)
     );
+    setCurrentMultiplier(1);
   };
 
   const removeCourse = (course: CourseName) => {
@@ -28,11 +29,11 @@ export default function Home() {
       const { [course]: _, ...f } = e;
       return f;
     });
-    if (availableList.length === 0) return course;
+    if (availableList.length === 0) setCurrentSelectedCourse(course);
   };
 
   const changeStudentsInCourse = (course: CourseName, multiplier: number) => {
-    setSelectedCourse((e) => ({ ...e, [course]: { multiplier } }));
+    setSelectedCourse((e) => ({ ...e, [course]: multiplier }));
   };
 
   const availableList = COURSE_NAME.filter(
@@ -41,7 +42,7 @@ export default function Home() {
 
   const requiredRoom = useMemo(
     () =>
-      Object.entries(selectedCourse).reduce((all, [name, { multiplier }]) => {
+      Object.entries(selectedCourse).reduce((all, [name, multiplier]) => {
         const _all: PartialRecord<RoomType, number> = { ...all };
         const requiredCourseRooms = COURSES[name as CourseName].class.total;
 
@@ -60,17 +61,26 @@ export default function Home() {
     <main>
       <h1>Two Point Campus Course Planner</h1>
       <p>
-        Plan your campus courses before you click the &ldquo;Confirm&rdquo; button, lose
-        your point, and end up with uneven class.
+        This tool will help you to plan your perfect course combination for your campus.
+        However, this is just a simple mathematical calculation. In practice, you might
+        have to fight with your timetable scheduler.
+      </p>
+      <p>
+        <strong>Why is the number of students are in a multiple of 8?</strong>
+        <br />
+        In short, the maximum class size is 8. If you have 9 students, it need additional
+        room (as same as 16 students). It is a good idea to take the advantage from this
+        to adjust your class size to maximize your profit. Also, if you wish not to take
+        anymore students in one&apos;s course, you can set it to 0 in the game.
       </p>
       <hr />
       <h2>Course Management</h2>
       <ul>
-        {Object.entries(selectedCourse).map(([name, data]) => (
+        {Object.entries(selectedCourse).map(([name, multiplier]) => (
           <li key={name}>
             {name} | Students:{" "}
             <select
-              value={data.multiplier}
+              value={multiplier}
               onChange={(e) =>
                 changeStudentsInCourse(name as CourseName, +e.target.value)
               }
@@ -91,9 +101,9 @@ export default function Home() {
             |{" "}
             {Object.entries(COURSES[name as CourseName].class.total).map(
               ([name, val]) => (
-                <>
-                  <span>{name}</span> <RoomVis slots={val} />{" "}
-                </>
+                <Fragment key={name}>
+                  <span>{name}</span> <RoomVis slots={val * multiplier} />{" "}
+                </Fragment>
               )
             )}
           </li>
@@ -119,20 +129,35 @@ export default function Home() {
           )}
         </select>
       </label>{" "}
+      <select
+        value={currentMultiplier}
+        onChange={(e) => setCurrentMultiplier(+e.target.value)}
+        disabled={availableList.length === 0}
+      >
+        <option value={8}>64</option>
+        <option value={7}>56</option>
+        <option value={6}>48</option>
+        <option value={5}>40</option>
+        <option value={4}>32</option>
+        <option value={3}>24</option>
+        <option value={2}>16</option>
+        <option value={1}>8</option>
+        <option value={0}>0</option>
+      </select>{" "}
       <button type="button" onClick={addCourse} disabled={availableList.length === 0}>
         Add
-      </button>
+      </button>{" "}
       {currentSelectedCourse && (
-        <blockquote>
-          <strong>{currentSelectedCourse}</strong>:{" "}
+        <>
+          |{" "}
           {Object.entries(COURSES[currentSelectedCourse].class.total).map(
             ([name, val]) => (
               <Fragment key={name}>
-                {name} <RoomVis slots={val} />{" "}
+                {name} <RoomVis slots={val * currentMultiplier} />{" "}
               </Fragment>
             )
           )}
-        </blockquote>
+        </>
       )}
       <hr />
       <h2>Classroom Requirements</h2>
@@ -141,15 +166,17 @@ export default function Home() {
         slots/room)
       </p>
       <ul>
-        {Object.entries(requiredRoom).map(([roomName, slotNumber]) => (
-          <li key={roomName}>
-            {roomName} | {Math.ceil(slotNumber / 6)} rooms ({slotNumber} slots) |{" "}
-            <RoomVis slots={slotNumber} />
-          </li>
-        ))}
+        {Object.entries(requiredRoom)
+          .sort((a, z) => a[0].localeCompare(z[0]))
+          .map(([roomName, slotNumber]) => (
+            <li key={roomName}>
+              {roomName} | {Math.ceil(slotNumber / 6)} rooms ({slotNumber} slots) |{" "}
+              <RoomVis slots={slotNumber} />
+            </li>
+          ))}
       </ul>
       <hr />
-      <h2>Some Complete Presets</h2>
+      <h2>Some Complete Sets</h2>
       <ul>
         <li>48 Academic Exercise</li>
         <li>24 Archaeology + 8 Money Wangling + 24 Scientography</li>
@@ -177,7 +204,13 @@ export default function Home() {
         <li>16 Virtual Normality</li>
         <li>48 Wizardry</li>
       </ul>
-      <hr></hr>
+      <p>
+        Some like &ldquo;Academic Exercise&rdquo;, &ldquo;Knight School&rdquo;,
+        &ldquo;Musicality&rdquo;, and &ldquo;Spy School&rdquo; does not fare well with
+        other courses, because it has some kind of &ldquo;left over&rdquo; that are hard
+        to be enough for other courses.
+      </p>
+      <hr />
       <details>
         <summary>Debug</summary>
         <pre>
