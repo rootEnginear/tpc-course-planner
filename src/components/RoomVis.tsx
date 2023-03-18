@@ -3,7 +3,7 @@ export default function RoomVis({ slots }: { slots: number }) {
     <>
       {new Array(slots).fill(0).map((_, i) => (
         <>
-          {i % 6 === 0 && i !== 0 && <span>|</span>}
+          {i % 6 === 0 && i !== 0 && <>&emsp;</>}
           <span key={i}>🟩</span>
         </>
       ))}
