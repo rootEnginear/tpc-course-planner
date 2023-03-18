@@ -1,7 +1,7 @@
-import { useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 
 import RoomVis from "@/components/RoomVis";
-import { COURSES, COURSE_NAME, CourseName, RoomType } from "@/data/courses";
+import { CourseName, COURSES, COURSE_NAME, RoomType } from "@/data/courses";
 import { PartialRecord } from "@/utils/partialrecord";
 
 type SelectedCourseDetail = { multiplier: number };
@@ -127,9 +127,9 @@ export default function Home() {
           <strong>{currentSelectedCourse}</strong>:{" "}
           {Object.entries(COURSES[currentSelectedCourse].class.total).map(
             ([name, val]) => (
-              <>
-                <span>{name}</span> <RoomVis slots={val} />{" "}
-              </>
+              <Fragment key={name}>
+                {name} <RoomVis slots={val} />{" "}
+              </Fragment>
             )
           )}
         </blockquote>
