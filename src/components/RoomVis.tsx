@@ -1,16 +1,22 @@
-import { Fragment } from "react";
-
 export default function RoomVis({ slots }: { slots: number }) {
+  const reminded_slots = slots % 6;
+  const full_slots = Math.floor(slots / 6);
+
   return (
-    <>
-      {new Array(slots).fill(0).map((_, i) => (
-        <Fragment key={i}>
-          {i % 6 === 0 && i !== 0 && <>&emsp;</>}
-          <span>🟩</span>
-        </Fragment>
+    <span>
+      {new Array(full_slots).fill(0).map((_, i) => (
+        <span className="mr-8 whitespace-nowrap" key={i}>
+          🟩🟩🟩🟩🟩🟩
+        </span>
       ))}
-      {slots % 6 !== 0 &&
-        new Array(6 - (slots % 6)).fill(0).map((_, i) => <span key={i}>🟥</span>)}
-    </>
+      {reminded_slots !== 0 && (
+        <span className="mr-8 whitespace-nowrap">
+          {"🟩".repeat(reminded_slots).padEnd(12, "🟥")}
+        </span>
+      )}
+      <span className="whitespace-nowrap">
+        {slots} slot{slots > 1 && "s"}
+      </span>
+    </span>
   );
 }
