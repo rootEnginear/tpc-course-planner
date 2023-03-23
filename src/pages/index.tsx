@@ -121,14 +121,36 @@ export default function Home() {
           have to fight with your timetable scheduler.
         </p>
         <p>
-          <strong>Why is the number of students are in a multiple of 8?</strong>
-          <br />
+          If you found any problems, please feel free to open{" "}
+          <a
+            href="https://github.com/rootEnginear/tpc-course-planner/issues"
+            target="_blank"
+            rel="nofollow noopener noreferrer"
+          >
+            an issue
+          </a>
+          . All contributions are welcome. The course and room icons are from{" "}
+          <a
+            href="https://two-point-campus.fandom.com/wiki/Two_Point_Campus_Wiki"
+            target="_blank"
+            rel="nofollow noopener noreferrer"
+          >
+            Two Point Campus Wiki
+          </a>
+          .
+        </p>
+        <details>
+          <summary>
+            <span className="font-bold">
+              Why is the number of students are in a multiple of 8?
+            </span>
+          </summary>
           In short, the maximum class size is 8. If you have 9 students, it will need an
           additional room which will hold up to 16 students. It is a good idea to take the
           advantage from this to adjust your class size to maximize your profit. Also, if
           you wish not to take anymore students in one&apos;s course, you can set it to 0
           in the game.
-        </p>
+        </details>
       </header>
       <hr />
       <main>
