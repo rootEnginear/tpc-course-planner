@@ -16,6 +16,7 @@ module.exports = {
     extend: {
       gridTemplateColumns: {
         "max-auto": "max-content auto",
+        "max2-auto": "max-content max-content auto",
       },
     },
   },

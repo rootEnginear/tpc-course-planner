@@ -1,4 +1,5 @@
-import { computePosition, shift, offset } from "@floating-ui/dom";
+import { computePosition, flip, offset, shift } from "@floating-ui/dom";
+import Image from "next/image";
 import { Fragment, MouseEvent, useEffect, useMemo, useRef, useState } from "react";
 
 import RoomVis from "@/components/RoomVis";
@@ -104,7 +105,7 @@ export default function Home() {
     computePosition(tooltipInfo.refEl as Element, elTooltip.current, {
       strategy: "fixed",
       placement: "left",
-      middleware: [shift({ padding: 8 }), offset(8)],
+      middleware: [flip(), offset(8), shift({ padding: 8 })],
     }).then(({ x, y }) => {
       setTooltipPosition({ x, y });
     });
@@ -137,6 +138,13 @@ export default function Home() {
             <details key={name}>
               <summary>
                 <span>
+                  <Image
+                    className="mr-4 inline-block"
+                    src={`./courses/${name.replace(/ /g, "-").toLowerCase()}.webp`}
+                    alt=""
+                    width={28}
+                    height={28}
+                  />
                   <span className="whitespace-nowrap">{name}</span>
                   <span className="ml-auto flex items-center gap-4">
                     <select
@@ -168,7 +176,16 @@ export default function Home() {
                 {Object.entries(COURSES[name as CourseName].class.total).map(
                   ([name, val]) => (
                     <Fragment key={name}>
-                      <span className="text-right">{name}</span>
+                      <span>
+                        <Image
+                          className="mr-4 inline-block"
+                          src={`./rooms/${name.replace(/ /g, "-").toLowerCase()}.webp`}
+                          alt=""
+                          width={24}
+                          height={24}
+                        />
+                        {name}
+                      </span>
                       <RoomVis slots={val * multiplier} />
                     </Fragment>
                   )
@@ -245,7 +262,16 @@ export default function Home() {
               {Object.entries(COURSES[currentSelectedCourse].class.total).map(
                 ([name, val]) => (
                   <Fragment key={name}>
-                    <span className="text-right">{name}</span>
+                    <span>
+                      <Image
+                        className="mr-4 inline-block"
+                        src={`./rooms/${name.replace(/ /g, "-").toLowerCase()}.webp`}
+                        alt=""
+                        width={24}
+                        height={24}
+                      />
+                      {name}
+                    </span>
                     <RoomVis slots={val * currentMultiplier} />
                   </Fragment>
                 )
@@ -258,21 +284,28 @@ export default function Home() {
           Total Classroom Required: {totalRooms} room{totalRooms > 1 && "s"}
         </h2>
         {totalRooms > 0 ? (
-          <div className="grid grid-cols-max-auto gap-x-8">
+          <div className="grid grid-cols-max2-auto gap-x-8">
             {Object.entries(requiredRoom)
               .sort((a, z) => a[0].localeCompare(z[0]))
               .map(([roomName, slotNumber]) => (
                 <Fragment key={roomName}>
-                  <span className="text-right">
+                  <span>
+                    <Image
+                      className="mr-4 inline-block"
+                      src={`./rooms/${roomName.replace(/ /g, "-").toLowerCase()}.webp`}
+                      alt=""
+                      width={24}
+                      height={24}
+                    />
                     <span
                       className="cursor-help rounded-sm underline decoration-dashed decoration-from-font hover:decoration-solid"
                       onMouseEnter={(e) => openTooltip(e, roomName as RoomName)}
                       onMouseLeave={hideTooltip}
                     >
                       {roomName}
-                    </span>{" "}
-                    &times;{Math.ceil(slotNumber / 6)}
+                    </span>
                   </span>
+                  <span>&times;{Math.ceil(slotNumber / 6)}</span>
                   <RoomVis slots={slotNumber} />
                 </Fragment>
               ))}
@@ -293,7 +326,9 @@ export default function Home() {
             left: tooltipPosition.x,
           }}
         >
-          <strong>Courses using this room:</strong>
+          <strong>
+            Course{COURSES_BY_ROOM[tooltipInfo.room].length > 1 && "s"} Using This Room:
+          </strong>
           <ul className="mb-0 list-none">
             {COURSES_BY_ROOM[tooltipInfo.room].map(([course, slotNumber]) => (
               <li key={course}>
