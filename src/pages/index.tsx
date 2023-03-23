@@ -1,7 +1,14 @@
-import { Fragment, useMemo, useState } from "react";
+import { computePosition, shift, offset } from "@floating-ui/dom";
+import { Fragment, MouseEvent, useEffect, useMemo, useRef, useState } from "react";
 
 import RoomVis from "@/components/RoomVis";
-import { CourseName, COURSES, COURSE_NAME, RoomType } from "@/data/courses";
+import {
+  CourseName,
+  COURSES,
+  COURSES_BY_ROOM,
+  COURSE_NAME,
+  RoomName,
+} from "@/data/courses";
 import { PartialRecord } from "@/utils/partialrecord";
 
 type SelectedCourseData = PartialRecord<CourseName, number>;
@@ -49,15 +56,15 @@ export default function Home() {
   const requiredRoom = useMemo(
     () =>
       Object.entries(selectedCourse).reduce((all, [name, multiplier]) => {
-        const _all: PartialRecord<RoomType, number> = { ...all };
+        const _all: PartialRecord<RoomName, number> = { ...all };
         const requiredCourseRooms = COURSES[name as CourseName].class.total;
 
         Object.entries(requiredCourseRooms).forEach(([room, number]) => {
-          _all[room as RoomType] = (_all[room as RoomType] ?? 0) + number * multiplier;
+          _all[room as RoomName] = (_all[room as RoomName] ?? 0) + number * multiplier;
         });
 
         return _all;
-      }, {} as PartialRecord<RoomType, number>),
+      }, {} as PartialRecord<RoomName, number>),
     [selectedCourse]
   );
 
@@ -65,6 +72,43 @@ export default function Home() {
     (a, c) => a + Math.ceil(c / 6),
     0
   );
+
+  const elTooltip = useRef<HTMLDivElement>(null);
+  const [tooltipInfo, setTooltipInfo] = useState<{
+    room: RoomName;
+    refEl: HTMLSpanElement | null;
+    show: boolean;
+  }>({ room: "Lecture Theater", show: false, refEl: null });
+  const [tooltipPosition, setTooltipPosition] = useState<{ x: number; y: number }>({
+    x: 0,
+    y: 0,
+  });
+
+  const openTooltip = (reference: MouseEvent<HTMLSpanElement>, room: RoomName) => {
+    if (!elTooltip.current) return;
+    setTooltipInfo({
+      room,
+      show: true,
+      refEl: reference.target as HTMLSpanElement | null,
+    });
+  };
+
+  const hideTooltip = () => {
+    setTooltipInfo((d) => ({ ...d, show: false }));
+  };
+
+  useEffect(() => {
+    if (!tooltipInfo.show) return;
+    if (!elTooltip.current) return;
+
+    computePosition(tooltipInfo.refEl as Element, elTooltip.current, {
+      strategy: "fixed",
+      placement: "left",
+      middleware: [shift({ padding: 8 }), offset(8)],
+    }).then(({ x, y }) => {
+      setTooltipPosition({ x, y });
+    });
+  }, [tooltipInfo]);
 
   return (
     <>
@@ -211,8 +255,7 @@ export default function Home() {
         )}
         <hr />
         <h2>
-          Total Classroom Required: {totalRooms} room
-          {totalRooms > 1 && "s"}
+          Total Classroom Required: {totalRooms} room{totalRooms > 1 && "s"}
         </h2>
         {totalRooms > 0 ? (
           <div className="grid grid-cols-max-auto gap-x-8">
@@ -221,7 +264,14 @@ export default function Home() {
               .map(([roomName, slotNumber]) => (
                 <Fragment key={roomName}>
                   <span className="text-right">
-                    {roomName} &times;{Math.ceil(slotNumber / 6)}
+                    <span
+                      className="cursor-help rounded-sm underline decoration-dashed decoration-from-font hover:decoration-solid"
+                      onMouseEnter={(e) => openTooltip(e, roomName as RoomName)}
+                      onMouseLeave={hideTooltip}
+                    >
+                      {roomName}
+                    </span>{" "}
+                    &times;{Math.ceil(slotNumber / 6)}
                   </span>
                   <RoomVis slots={slotNumber} />
                 </Fragment>
@@ -233,6 +283,26 @@ export default function Home() {
             <span className="whitespace-nowrap">Add some course above.</span>
           </div>
         )}
+        <div
+          className={`fixed w-max max-w-[250px] rounded-md border-2 border-gray-800 bg-white p-8 text-right transition-opacity ${
+            tooltipInfo.show ? "opacity-100" : "pointer-events-none opacity-0"
+          }`}
+          ref={elTooltip}
+          style={{
+            top: tooltipPosition.y,
+            left: tooltipPosition.x,
+          }}
+        >
+          <strong>Courses using this room:</strong>
+          <ul className="mb-0 list-none">
+            {COURSES_BY_ROOM[tooltipInfo.room].map(([course, slotNumber]) => (
+              <li key={course}>
+                {course}: {slotNumber}
+                <sup>sl</sup>
+              </li>
+            ))}
+          </ul>
+        </div>
         <hr />
         <h2>Some Complete Sets</h2>
         <ul>

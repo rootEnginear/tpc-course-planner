@@ -6,6 +6,7 @@ module.exports = {
       sans: ["Space Grotesk", "sans-serif"],
     },
     spacing: {
+      0: "0",
       4: "4px",
       8: "8px",
       16: "16px",

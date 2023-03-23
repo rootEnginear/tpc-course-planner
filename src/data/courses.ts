@@ -1,27 +1,27 @@
 import { PartialRecord } from "@/utils/partialrecord";
 
-export const ROOM_TYPE = [
-  "BattleGround",
-  "CheeseballField",
-  "ComputerLab",
-  "DigSite",
-  "GadgetLab",
+export const ROOM_NAME = [
+  "Battle Ground",
+  "Cheeseball Field",
+  "Computer Lab",
+  "Dig Site",
+  "Gadget Lab",
   "Gym",
-  "JoustingField",
-  "LectureTheater",
-  "PanicRoom",
-  "PotionsRoom",
-  "RecordingStudio",
-  "RoboConstruction",
-  "RoboDesign",
-  "SavouryKitchen",
-  "ScienceLab",
-  "SpellsRoom",
-  "SweetKitchen",
-  "VRLab",
+  "Jousting Field",
+  "Lecture Theater",
+  "Panic Room",
+  "Potions Room",
+  "Recording Studio",
+  "Robo Construction",
+  "Robo Design",
+  "Savoury Kitchen",
+  "Science Lab",
+  "Spells Room",
+  "Sweet Kitchen",
+  "VR Lab",
 ] as const;
 
-export type RoomType = typeof ROOM_TYPE[number];
+export type RoomName = (typeof ROOM_NAME)[number];
 
 export const COURSE_NAME = [
   "Academic Exercise",
@@ -43,14 +43,14 @@ export const COURSE_NAME = [
   "Wizardry",
 ] as const;
 
-export type CourseName = typeof COURSE_NAME[number];
+export type CourseName = (typeof COURSE_NAME)[number];
 
 export type Course = Record<
   CourseName,
   {
     class: {
-      total: PartialRecord<RoomType, number>;
-      per_year: PartialRecord<RoomType, number>[];
+      total: PartialRecord<RoomName, number>;
+      per_year: PartialRecord<RoomName, number>[];
     };
   }
 >;
@@ -60,22 +60,22 @@ export const COURSES: Course = {
     class: {
       per_year: [
         {
-          LectureTheater: 1,
-          CheeseballField: 2,
+          "Lecture Theater": 1,
+          "Cheeseball Field": 2,
         },
         {
-          CheeseballField: 1,
+          "Cheeseball Field": 1,
           Gym: 2,
         },
         {
-          LectureTheater: 1,
-          CheeseballField: 1,
+          "Lecture Theater": 1,
+          "Cheeseball Field": 1,
           Gym: 1,
         },
       ],
       total: {
-        LectureTheater: 2,
-        CheeseballField: 4,
+        "Lecture Theater": 2,
+        "Cheeseball Field": 4,
         Gym: 3,
       },
     },
@@ -84,23 +84,23 @@ export const COURSES: Course = {
     class: {
       per_year: [
         {
-          LectureTheater: 1,
-          DigSite: 2,
+          "Lecture Theater": 1,
+          "Dig Site": 2,
         },
         {
-          DigSite: 2,
-          ComputerLab: 1,
+          "Dig Site": 2,
+          "Computer Lab": 1,
         },
         {
-          DigSite: 2,
-          ScienceLab: 1,
+          "Dig Site": 2,
+          "Science Lab": 1,
         },
       ],
       total: {
-        LectureTheater: 1,
-        DigSite: 6,
-        ComputerLab: 1,
-        ScienceLab: 1,
+        "Lecture Theater": 1,
+        "Dig Site": 6,
+        "Computer Lab": 1,
+        "Science Lab": 1,
       },
     },
   },
@@ -108,16 +108,16 @@ export const COURSES: Course = {
     class: {
       per_year: [
         {
-          LectureTheater: 2,
+          "Lecture Theater": 2,
           Gym: 1,
         },
         {
-          LectureTheater: 2,
+          "Lecture Theater": 2,
           Gym: 1,
         },
       ],
       total: {
-        LectureTheater: 4,
+        "Lecture Theater": 4,
         Gym: 2,
       },
     },
@@ -126,16 +126,16 @@ export const COURSES: Course = {
     class: {
       per_year: [
         {
-          LectureTheater: 3,
+          "Lecture Theater": 3,
         },
         {
-          LectureTheater: 1,
-          PotionsRoom: 2,
+          "Lecture Theater": 1,
+          "Potions Room": 2,
         },
       ],
       total: {
-        LectureTheater: 4,
-        PotionsRoom: 2,
+        "Lecture Theater": 4,
+        "Potions Room": 2,
       },
     },
   },
@@ -143,17 +143,17 @@ export const COURSES: Course = {
     class: {
       per_year: [
         {
-          LectureTheater: 2,
-          ScienceLab: 1,
+          "Lecture Theater": 2,
+          "Science Lab": 1,
         },
         {
-          LectureTheater: 2,
-          ScienceLab: 1,
+          "Lecture Theater": 2,
+          "Science Lab": 1,
         },
       ],
       total: {
-        LectureTheater: 4,
-        ScienceLab: 2,
+        "Lecture Theater": 4,
+        "Science Lab": 2,
       },
     },
   },
@@ -161,25 +161,25 @@ export const COURSES: Course = {
     class: {
       per_year: [
         {
-          LectureTheater: 1,
-          SavouryKitchen: 2,
+          "Lecture Theater": 1,
+          "Savoury Kitchen": 2,
         },
         {
-          LectureTheater: 1,
-          SavouryKitchen: 1,
-          SweetKitchen: 1,
+          "Lecture Theater": 1,
+          "Savoury Kitchen": 1,
+          "Sweet Kitchen": 1,
         },
         {
-          SavouryKitchen: 1,
-          SweetKitchen: 1,
-          ComputerLab: 1,
+          "Savoury Kitchen": 1,
+          "Sweet Kitchen": 1,
+          "Computer Lab": 1,
         },
       ],
       total: {
-        LectureTheater: 2,
-        SavouryKitchen: 4,
-        SweetKitchen: 2,
-        ComputerLab: 1,
+        "Lecture Theater": 2,
+        "Savoury Kitchen": 4,
+        "Sweet Kitchen": 2,
+        "Computer Lab": 1,
       },
     },
   },
@@ -187,11 +187,11 @@ export const COURSES: Course = {
     class: {
       per_year: [
         {
-          LectureTheater: 3,
+          "Lecture Theater": 3,
         },
       ],
       total: {
-        LectureTheater: 3,
+        "Lecture Theater": 3,
       },
     },
   },
@@ -199,24 +199,24 @@ export const COURSES: Course = {
     class: {
       per_year: [
         {
-          LectureTheater: 1,
-          ComputerLab: 2,
+          "Lecture Theater": 1,
+          "Computer Lab": 2,
         },
         {
-          LectureTheater: 1,
-          ComputerLab: 1,
-          VRLab: 1,
+          "Lecture Theater": 1,
+          "Computer Lab": 1,
+          "VR Lab": 1,
         },
         {
-          LectureTheater: 1,
-          ComputerLab: 1,
-          VRLab: 1,
+          "Lecture Theater": 1,
+          "Computer Lab": 1,
+          "VR Lab": 1,
         },
       ],
       total: {
-        LectureTheater: 3,
-        ComputerLab: 4,
-        VRLab: 2,
+        "Lecture Theater": 3,
+        "Computer Lab": 4,
+        "VR Lab": 2,
       },
     },
   },
@@ -224,23 +224,23 @@ export const COURSES: Course = {
     class: {
       per_year: [
         {
-          LectureTheater: 1,
-          BattleGround: 2,
+          "Lecture Theater": 1,
+          "Battle Ground": 2,
         },
         {
-          LectureTheater: 1,
-          BattleGround: 1,
-          JoustingField: 1,
+          "Lecture Theater": 1,
+          "Battle Ground": 1,
+          "Jousting Field": 1,
         },
         {
-          BattleGround: 1,
-          JoustingField: 2,
+          "Battle Ground": 1,
+          "Jousting Field": 2,
         },
       ],
       total: {
-        LectureTheater: 2,
-        BattleGround: 4,
-        JoustingField: 3,
+        "Lecture Theater": 2,
+        "Battle Ground": 4,
+        "Jousting Field": 3,
       },
     },
   },
@@ -248,17 +248,17 @@ export const COURSES: Course = {
     class: {
       per_year: [
         {
-          LectureTheater: 2,
-          ComputerLab: 1,
+          "Lecture Theater": 2,
+          "Computer Lab": 1,
         },
         {
-          LectureTheater: 1,
-          ComputerLab: 2,
+          "Lecture Theater": 1,
+          "Computer Lab": 2,
         },
       ],
       total: {
-        LectureTheater: 3,
-        ComputerLab: 3,
+        "Lecture Theater": 3,
+        "Computer Lab": 3,
       },
     },
   },
@@ -266,23 +266,23 @@ export const COURSES: Course = {
     class: {
       per_year: [
         {
-          LectureTheater: 1,
-          RecordingStudio: 2,
+          "Lecture Theater": 1,
+          "Recording Studio": 2,
         },
         {
-          LectureTheater: 1,
-          RecordingStudio: 1,
-          ComputerLab: 1,
+          "Lecture Theater": 1,
+          "Recording Studio": 1,
+          "Computer Lab": 1,
         },
         {
-          LectureTheater: 1,
-          RecordingStudio: 2,
+          "Lecture Theater": 1,
+          "Recording Studio": 2,
         },
       ],
       total: {
-        LectureTheater: 3,
-        RecordingStudio: 5,
-        ComputerLab: 1,
+        "Lecture Theater": 3,
+        "Recording Studio": 5,
+        "Computer Lab": 1,
       },
     },
   },
@@ -290,24 +290,24 @@ export const COURSES: Course = {
     class: {
       per_year: [
         {
-          LectureTheater: 1,
-          RoboConstruction: 2,
+          "Lecture Theater": 1,
+          "Robo Construction": 2,
         },
         {
-          LectureTheater: 1,
-          RoboConstruction: 1,
-          RoboDesign: 1,
+          "Lecture Theater": 1,
+          "Robo Construction": 1,
+          "Robo Design": 1,
         },
         {
-          LectureTheater: 1,
-          RoboConstruction: 1,
-          RoboDesign: 1,
+          "Lecture Theater": 1,
+          "Robo Construction": 1,
+          "Robo Design": 1,
         },
       ],
       total: {
-        LectureTheater: 3,
-        RoboConstruction: 4,
-        RoboDesign: 2,
+        "Lecture Theater": 3,
+        "Robo Construction": 4,
+        "Robo Design": 2,
       },
     },
   },
@@ -315,32 +315,32 @@ export const COURSES: Course = {
     class: {
       per_year: [
         {
-          LectureTheater: 1,
-          ComputerLab: 1,
-          ScienceLab: 1,
+          "Lecture Theater": 1,
+          "Computer Lab": 1,
+          "Science Lab": 1,
         },
         {
-          LectureTheater: 1,
-          ScienceLab: 1,
+          "Lecture Theater": 1,
+          "Science Lab": 1,
           Gym: 1,
         },
         {
-          ScienceLab: 1,
+          "Science Lab": 1,
           Gym: 1,
-          VRLab: 1,
+          "VR Lab": 1,
         },
         {
-          ComputerLab: 1,
-          ScienceLab: 1,
+          "Computer Lab": 1,
+          "Science Lab": 1,
           Gym: 1,
         },
       ],
       total: {
-        LectureTheater: 2,
-        ComputerLab: 2,
-        ScienceLab: 4,
+        "Lecture Theater": 2,
+        "Computer Lab": 2,
+        "Science Lab": 4,
         Gym: 3,
-        VRLab: 1,
+        "VR Lab": 1,
       },
     },
   },
@@ -348,21 +348,21 @@ export const COURSES: Course = {
     class: {
       per_year: [
         {
-          LectureTheater: 1,
-          ScienceLab: 2,
+          "Lecture Theater": 1,
+          "Science Lab": 2,
         },
         {
-          LectureTheater: 2,
-          ScienceLab: 1,
+          "Lecture Theater": 2,
+          "Science Lab": 1,
         },
         {
-          LectureTheater: 1,
-          ScienceLab: 2,
+          "Lecture Theater": 1,
+          "Science Lab": 2,
         },
       ],
       total: {
-        LectureTheater: 4,
-        ScienceLab: 5,
+        "Lecture Theater": 4,
+        "Science Lab": 5,
       },
     },
   },
@@ -370,24 +370,24 @@ export const COURSES: Course = {
     class: {
       per_year: [
         {
-          LectureTheater: 1,
-          GadgetLab: 2,
+          "Lecture Theater": 1,
+          "Gadget Lab": 2,
         },
         {
-          LectureTheater: 1,
-          PanicRoom: 2,
+          "Lecture Theater": 1,
+          "Panic Room": 2,
         },
         {
-          GadgetLab: 1,
-          PanicRoom: 1,
-          ComputerLab: 1,
+          "Gadget Lab": 1,
+          "Panic Room": 1,
+          "Computer Lab": 1,
         },
       ],
       total: {
-        LectureTheater: 2,
-        GadgetLab: 3,
-        PanicRoom: 3,
-        ComputerLab: 1,
+        "Lecture Theater": 2,
+        "Gadget Lab": 3,
+        "Panic Room": 3,
+        "Computer Lab": 1,
       },
     },
   },
@@ -395,21 +395,21 @@ export const COURSES: Course = {
     class: {
       per_year: [
         {
-          LectureTheater: 1,
-          VRLab: 2,
+          "Lecture Theater": 1,
+          "VR Lab": 2,
         },
         {
-          LectureTheater: 1,
-          VRLab: 2,
+          "Lecture Theater": 1,
+          "VR Lab": 2,
         },
         {
-          LectureTheater: 1,
-          VRLab: 2,
+          "Lecture Theater": 1,
+          "VR Lab": 2,
         },
       ],
       total: {
-        LectureTheater: 3,
-        VRLab: 6,
+        "Lecture Theater": 3,
+        "VR Lab": 6,
       },
     },
   },
@@ -417,24 +417,30 @@ export const COURSES: Course = {
     class: {
       per_year: [
         {
-          LectureTheater: 1,
-          PotionsRoom: 2,
+          "Lecture Theater": 1,
+          "Potions Room": 2,
         },
         {
-          LectureTheater: 1,
-          PotionsRoom: 1,
-          SpellsRoom: 1,
+          "Lecture Theater": 1,
+          "Potions Room": 1,
+          "Spells Room": 1,
         },
         {
-          PotionsRoom: 1,
-          SpellsRoom: 2,
+          "Potions Room": 1,
+          "Spells Room": 2,
         },
       ],
       total: {
-        LectureTheater: 2,
-        PotionsRoom: 4,
-        SpellsRoom: 3,
+        "Lecture Theater": 2,
+        "Potions Room": 4,
+        "Spells Room": 3,
       },
     },
   },
 };
+
+export const COURSES_BY_ROOM = Object.entries(COURSES).reduce((all, [course, data]) => {
+  for (let room of Object.keys(data.class.total))
+    all[room].push([course, data.class.total[room as RoomName] ?? 0]); // evil side effect 😈
+  return all;
+}, Object.fromEntries(ROOM_NAME.map((room) => [room, [] as [string, number][]])));
