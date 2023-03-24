@@ -9,6 +9,7 @@ import {
   COURSES_BY_ROOM,
   COURSE_NAME,
   RoomName,
+  COURSE_LEVEL_DATA_BY_STUDENTS,
 } from "@/data/courses";
 import { PartialRecord } from "@/utils/partialrecord";
 
@@ -52,6 +53,21 @@ export default function Home() {
 
   const availableList = COURSE_NAME.filter(
     (course) => !Object.keys(selectedCourse).includes(course)
+  );
+
+  const totalCourseCostAndStudents = Object.entries(selectedCourse).reduce(
+    (a, [name, multiplier]) => {
+      const cost =
+        a[0] +
+        COURSE_LEVEL_DATA_BY_STUDENTS[multiplier][1][
+          COURSES[name as CourseName].years - 1 ?? 0
+        ];
+      const lowestStudent = Math.max(a[1] + (multiplier - 1) * 8 + 1, 0);
+      const highestStudent = a[2] + multiplier * 8;
+
+      return [cost, lowestStudent, highestStudent];
+    },
+    [0, 0, 0]
   );
 
   const requiredRoom = useMemo(
@@ -154,7 +170,38 @@ export default function Home() {
       </header>
       <hr />
       <main>
-        <h2>Course Management</h2>
+        <h2 className="flex items-center gap-4">
+          <span>Course Management</span>
+          {Object.entries(selectedCourse).length && (
+            <>
+              <span className="ml-auto">
+                {totalCourseCostAndStudents[0].toLocaleString()}
+              </span>
+              <Image
+                className="mr-4"
+                src="/imgs/course-point.webp"
+                alt=""
+                width="24"
+                height="24"
+              />
+              <span>
+                {totalCourseCostAndStudents[1]}&ndash;{totalCourseCostAndStudents[2]}
+              </span>
+              <Image
+                className="mr-4"
+                src="/imgs/students.webp"
+                alt=""
+                width="24"
+                height="24"
+              />
+              <span>
+                {Math.ceil(totalCourseCostAndStudents[1] / 5)}&ndash;
+                {Math.ceil(totalCourseCostAndStudents[2] / 5)}
+              </span>
+              <Image src="/imgs/dorm.webp" alt="" width="24" height="24" />
+            </>
+          )}
+        </h2>
         {Object.entries(selectedCourse).length ? (
           Object.entries(selectedCourse).map(([name, multiplier]) => (
             <details key={name}>
@@ -168,7 +215,29 @@ export default function Home() {
                     height={28}
                   />
                   <span className="whitespace-nowrap">{name}</span>
-                  <span className="ml-auto flex items-center gap-4">
+                  <Image
+                    className="ml-auto inline-block"
+                    src="/imgs/level.webp"
+                    alt=""
+                    width="16"
+                    height="16"
+                  />
+                  <span className="text-sm font-normal">
+                    {COURSE_LEVEL_DATA_BY_STUDENTS[multiplier][0]} |{" "}
+                    {
+                      COURSE_LEVEL_DATA_BY_STUDENTS[multiplier][1][
+                        COURSES[name as CourseName].years - 1 ?? 0
+                      ]
+                    }
+                  </span>
+                  <Image
+                    className="mr-4 inline-block"
+                    src="/imgs/course-point.webp"
+                    alt=""
+                    width="16"
+                    height="16"
+                  />
+                  <span className="flex items-center gap-4">
                     <select
                       value={multiplier}
                       onChange={(e) =>
@@ -182,8 +251,7 @@ export default function Home() {
                       <option value={4}>25&ndash;32 students</option>
                       <option value={5}>33&ndash;40 students</option>
                       <option value={6}>41&ndash;48 students</option>
-                      <option value={7}>49&ndash;56 students</option>
-                      <option value={8}>57&ndash;64 students</option>
+                      <option value={7}>49&ndash;55 students</option>
                     </select>
                     <button
                       type="button"
@@ -257,8 +325,7 @@ export default function Home() {
               <option value={4}>25&ndash;32 students</option>
               <option value={5}>33&ndash;40 students</option>
               <option value={6}>41&ndash;48 students</option>
-              <option value={7}>49&ndash;56 students</option>
-              <option value={8}>57&ndash;64 students</option>
+              <option value={7}>49&ndash;55 students</option>
             </select>
             <button
               type="button"

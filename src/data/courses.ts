@@ -52,6 +52,7 @@ export type Course = Record<
       total: PartialRecord<RoomName, number>;
       per_year: PartialRecord<RoomName, number>[];
     };
+    years: 1 | 2 | 3 | 4;
   }
 >;
 
@@ -79,6 +80,7 @@ export const COURSES: Course = {
         Gym: 3,
       },
     },
+    years: 3,
   },
   Archaeology: {
     class: {
@@ -103,6 +105,7 @@ export const COURSES: Course = {
         "Science Lab": 1,
       },
     },
+    years: 3,
   },
   "Countercultural Studies": {
     class: {
@@ -121,6 +124,7 @@ export const COURSES: Course = {
         Gym: 2,
       },
     },
+    years: 2,
   },
   "Dark Art": {
     class: {
@@ -138,6 +142,7 @@ export const COURSES: Course = {
         "Potions Room": 2,
       },
     },
+    years: 2,
   },
   "Funny Business": {
     class: {
@@ -156,6 +161,7 @@ export const COURSES: Course = {
         "Science Lab": 2,
       },
     },
+    years: 2,
   },
   Gastronomy: {
     class: {
@@ -182,6 +188,7 @@ export const COURSES: Course = {
         "Computer Lab": 1,
       },
     },
+    years: 3,
   },
   "General Knowledge": {
     class: {
@@ -194,6 +201,7 @@ export const COURSES: Course = {
         "Lecture Theater": 3,
       },
     },
+    years: 1,
   },
   "Internet History": {
     class: {
@@ -219,6 +227,7 @@ export const COURSES: Course = {
         "VR Lab": 2,
       },
     },
+    years: 3,
   },
   "Knight School": {
     class: {
@@ -243,6 +252,7 @@ export const COURSES: Course = {
         "Jousting Field": 3,
       },
     },
+    years: 3,
   },
   "Money Wangling": {
     class: {
@@ -261,6 +271,7 @@ export const COURSES: Course = {
         "Computer Lab": 3,
       },
     },
+    years: 2,
   },
   Musicality: {
     class: {
@@ -285,6 +296,7 @@ export const COURSES: Course = {
         "Computer Lab": 1,
       },
     },
+    years: 3,
   },
   Robotics: {
     class: {
@@ -310,6 +322,7 @@ export const COURSES: Course = {
         "Robo Design": 2,
       },
     },
+    years: 3,
   },
   "School of Thought": {
     class: {
@@ -343,6 +356,7 @@ export const COURSES: Course = {
         "VR Lab": 1,
       },
     },
+    years: 4,
   },
   Scientography: {
     class: {
@@ -365,6 +379,7 @@ export const COURSES: Course = {
         "Science Lab": 5,
       },
     },
+    years: 3,
   },
   "Spy School": {
     class: {
@@ -390,6 +405,7 @@ export const COURSES: Course = {
         "Computer Lab": 1,
       },
     },
+    years: 3,
   },
   "Virtual Normality": {
     class: {
@@ -412,6 +428,7 @@ export const COURSES: Course = {
         "VR Lab": 6,
       },
     },
+    years: 3,
   },
   Wizardry: {
     class: {
@@ -436,6 +453,7 @@ export const COURSES: Course = {
         "Spells Room": 3,
       },
     },
+    years: 3,
   },
 };
 
@@ -444,3 +462,16 @@ export const COURSES_BY_ROOM = Object.entries(COURSES).reduce((all, [course, dat
     all[room].push([course, data.class.total[room as RoomName] ?? 0]); // evil side effect 😈
   return all;
 }, Object.fromEntries(ROOM_NAME.map((room) => [room, [] as [string, number][]])));
+
+export type CourseLevelData = [number, [number, number, number, number], number];
+
+export const COURSE_LEVEL_DATA_BY_STUDENTS: CourseLevelData[] = [
+  [0, [0, 0, 0, 0], 0],
+  [1, [10, 20, 30, 40], 10], // 8
+  [3, [35, 55, 75, 95], 20], // 16
+  [4, [55, 80, 105, 130], 25], // 24
+  [6, [110, 145, 180, 215], 35], // 32
+  [7, [145, 185, 225, 265], 40], // 40
+  [9, [230, 280, 330, 380], 50], // 48
+  [10, [280, 335, 390, 445], 55], // 55
+];
