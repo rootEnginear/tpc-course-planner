@@ -327,22 +327,26 @@ export default function Home() {
               <option value={6}>41&ndash;48 students</option>
               <option value={7}>49&ndash;55 students</option>
             </select>
+            {availableList.length !== 0 && (
+              <button
+                type="button"
+                onClick={addCourse}
+                disabled={availableList.length === 0}
+              >
+                ➕
+              </button>
+            )}
+          </div>
+          {availableList.length !== 0 && (
             <button
               type="button"
-              onClick={addCourse}
+              className="link ml-auto text-sm"
+              onClick={() => setShowRequiredRoom((e) => !e)}
               disabled={availableList.length === 0}
             >
-              ➕
+              {showRequiredRoom ? "Hide" : "Show"} Rooms
             </button>
-          </div>
-          <button
-            type="button"
-            className="link ml-auto text-sm"
-            onClick={() => setShowRequiredRoom((e) => !e)}
-            disabled={availableList.length === 0}
-          >
-            {showRequiredRoom ? "Hide" : "Show"} Rooms
-          </button>
+          )}
         </div>
         {showRequiredRoom && currentSelectedCourse && (
           <div>
