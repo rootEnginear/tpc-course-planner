@@ -172,7 +172,7 @@ export default function Home() {
       <main>
         <h2 className="flex items-center gap-4">
           <span>Course Management</span>
-          {Object.entries(selectedCourse).length && (
+          {Object.entries(selectedCourse).length !== 0 && (
             <>
               <span className="ml-auto">
                 {totalCourseCostAndStudents[0].toLocaleString()}
