@@ -133,8 +133,8 @@ export default function Home() {
         <h1>Two Point Campus Course Planner</h1>
         <p>
           This tool will help you to plan your perfect course combination for your campus.
-          However, this is just a simple mathematical calculation. In practice, you might
-          have to fight with your timetable scheduler.
+          This is done with a simple mathematical calculation. In practice, however, you
+          might have to fight with your timetable scheduler.
         </p>
         <p>
           If you found any problems, please feel free to open{" "}
@@ -145,7 +145,7 @@ export default function Home() {
           >
             an issue
           </a>
-          . All contributions are welcome. The course and room icons are from{" "}
+          . All contributions are welcome. The icons are from{" "}
           <a
             href="https://two-point-campus.fandom.com/wiki/Two_Point_Campus_Wiki"
             target="_blank"
@@ -158,14 +158,14 @@ export default function Home() {
         <details>
           <summary>
             <span className="font-bold">
-              Why is the number of students are in a multiple of 8?
+              Why is the number of students a multiple of 8?
             </span>
           </summary>
-          In short, the maximum class size is 8. If you have 9 students, it will need an
-          additional room which will hold up to 16 students. It is a good idea to take the
-          advantage from this to adjust your class size to maximize your profit. Also, if
-          you wish not to take anymore students in one&apos;s course, you can set it to 0
-          in the game.
+          In short, the maximum class size is 8. — If you have 9 students, you will
+          require an additional room that can accommodate up to 16 students. So it&apos;s
+          a good idea to take advantage of this to maximize your profit. Also, you can set
+          the student intake to 0 in the game if you don&apos;t want to take any more
+          students or shut down the course.
         </details>
       </header>
       <hr />
@@ -461,10 +461,11 @@ export default function Home() {
           <li>48 Wizardry</li>
         </ul>
         <p>
-          Some courses like &ldquo;Academic Exercise&rdquo;, &ldquo;Knight School&rdquo;,
-          &ldquo;Musicality&rdquo;, and &ldquo;Spy School&rdquo; does not fare well with
-          other courses because it has some kind of &ldquo;left over&rdquo; that are hard
-          to be enough for other courses. But let me know if you can crack the code!
+          Some courses, such as &ldquo;Academic Exercise&rdquo;, &ldquo;Knight
+          School&rdquo;, &ldquo;Musicality&rdquo;, and &ldquo;Spy School&rdquo;,
+          don&apos;t fare well with other courses because they have some left-over slots
+          that are difficult to fit with other courses. But let me know if you can crack
+          the code!
         </p>
       </main>
       <hr />
