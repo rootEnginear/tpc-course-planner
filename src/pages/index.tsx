@@ -179,7 +179,7 @@ export default function Home() {
               </span>
               <Image
                 className="mr-4"
-                src="/imgs/course-point.webp"
+                src="./imgs/course-point.webp"
                 alt=""
                 width="24"
                 height="24"
@@ -189,7 +189,7 @@ export default function Home() {
               </span>
               <Image
                 className="mr-4"
-                src="/imgs/students.webp"
+                src="./imgs/students.webp"
                 alt=""
                 width="24"
                 height="24"
@@ -198,7 +198,7 @@ export default function Home() {
                 {Math.ceil(totalCourseCostAndStudents[1] / 5)}&ndash;
                 {Math.ceil(totalCourseCostAndStudents[2] / 5)}
               </span>
-              <Image src="/imgs/dorm.webp" alt="" width="24" height="24" />
+              <Image src="./imgs/dorm.webp" alt="" width="24" height="24" />
             </>
           )}
         </h2>
@@ -217,7 +217,7 @@ export default function Home() {
                   <span className="whitespace-nowrap">{name}</span>
                   <Image
                     className="ml-auto inline-block"
-                    src="/imgs/level.webp"
+                    src="./imgs/level.webp"
                     alt=""
                     width="16"
                     height="16"
@@ -232,7 +232,7 @@ export default function Home() {
                   </span>
                   <Image
                     className="mr-4 inline-block"
-                    src="/imgs/course-point.webp"
+                    src="./imgs/course-point.webp"
                     alt=""
                     width="16"
                     height="16"
