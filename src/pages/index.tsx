@@ -460,7 +460,8 @@ export default function Home() {
         <ul>
           <li>24 Archaeology + 8 Money Wangling + 24 Scientography</li>
           <li>16 Dark Art + 16 Wizardry</li>
-          <li>24 Gastronomy + 8 Money Wangling + 8 General Knowledge</li>
+          <li>24 Gastronomy + 24 Scientography</li>
+          <li>24 Gastronomy + 24 Archaeology + 8 Money Wangling</li>
           <li>24 Internet History + 8 General Knowledge</li>
           <li>24 Robotics + 8 General Knowledge</li>
           <li>16 School of Thought + 16 Internet History + 16 Funny Business</li>

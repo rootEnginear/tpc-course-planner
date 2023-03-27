@@ -178,14 +178,14 @@ export const COURSES: Course = {
         {
           "Savoury Kitchen": 1,
           "Sweet Kitchen": 1,
-          "Computer Lab": 1,
+          "Science Lab": 1,
         },
       ],
       total: {
         "Lecture Theater": 2,
         "Savoury Kitchen": 4,
         "Sweet Kitchen": 2,
-        "Computer Lab": 1,
+        "Science Lab": 1,
       },
     },
     years: 3,
