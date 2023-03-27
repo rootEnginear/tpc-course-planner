@@ -55,19 +55,24 @@ export default function Home() {
     (course) => !Object.keys(selectedCourse).includes(course)
   );
 
-  const totalCourseCostAndStudents = Object.entries(selectedCourse).reduce(
-    (a, [name, multiplier]) => {
-      const cost =
-        a[0] +
-        COURSE_LEVEL_DATA_BY_STUDENTS[multiplier][1][
-          COURSES[name as CourseName].years - 1 ?? 0
-        ];
-      const lowestStudent = Math.max(a[1] + (multiplier - 1) * 8 + 1, 0);
-      const highestStudent = a[2] + multiplier * 8;
+  const totalCourseCostAndStudents = useMemo(
+    () =>
+      Object.entries(selectedCourse).reduce(
+        (a, [name, multiplier]) => {
+          const course_year = COURSES[name as CourseName].years;
+          const cost =
+            a[0] + COURSE_LEVEL_DATA_BY_STUDENTS[multiplier][1][course_year - 1 ?? 0];
+          const lowestStudent = Math.max(
+            a[1] + ((multiplier - 1) * 8 + 1) * course_year,
+            0
+          );
+          const highestStudent = a[2] + multiplier * 8 * course_year;
 
-      return [cost, lowestStudent, highestStudent];
-    },
-    [0, 0, 0]
+          return [cost, lowestStudent, highestStudent];
+        },
+        [0, 0, 0]
+      ),
+    [selectedCourse]
   );
 
   const requiredRoom = useMemo(
@@ -180,7 +185,8 @@ export default function Home() {
               <Image
                 className="mr-4"
                 src="./imgs/course-point.webp"
-                alt=""
+                alt="Course Points"
+                title="Course Points"
                 width="24"
                 height="24"
               />
@@ -190,7 +196,8 @@ export default function Home() {
               <Image
                 className="mr-4"
                 src="./imgs/students.webp"
-                alt=""
+                alt="Estimated Students"
+                title="Estimated Students"
                 width="24"
                 height="24"
               />
@@ -198,7 +205,13 @@ export default function Home() {
                 {Math.ceil(totalCourseCostAndStudents[1] / 5)}&ndash;
                 {Math.ceil(totalCourseCostAndStudents[2] / 5)}
               </span>
-              <Image src="./imgs/dorm.webp" alt="" width="24" height="24" />
+              <Image
+                src="./imgs/dorm.webp"
+                alt="Bed Required"
+                title="Bed Required"
+                width="24"
+                height="24"
+              />
             </>
           )}
         </h2>
@@ -214,11 +227,17 @@ export default function Home() {
                     width={28}
                     height={28}
                   />
-                  <span className="whitespace-nowrap">{name}</span>
+                  <span className="whitespace-nowrap">
+                    {name}{" "}
+                    <span className="font-normal">
+                      ({COURSES[name as CourseName].years} years)
+                    </span>
+                  </span>
                   <Image
                     className="ml-auto inline-block"
                     src="./imgs/level.webp"
-                    alt=""
+                    alt="Minimum Course Level"
+                    title="Minimum Course Level"
                     width="16"
                     height="16"
                   />
@@ -233,7 +252,8 @@ export default function Home() {
                   <Image
                     className="mr-4 inline-block"
                     src="./imgs/course-point.webp"
-                    alt=""
+                    alt="Course Points"
+                    title="Course Points"
                     width="16"
                     height="16"
                   />
@@ -245,17 +265,19 @@ export default function Home() {
                       }
                     >
                       <option value={0}>0 student (Hide)</option>
-                      <option value={1}>1&ndash;8 students</option>
-                      <option value={2}>9&ndash;16 students</option>
-                      <option value={3}>17&ndash;24 students</option>
-                      <option value={4}>25&ndash;32 students</option>
-                      <option value={5}>33&ndash;40 students</option>
-                      <option value={6}>41&ndash;48 students</option>
-                      <option value={7}>49&ndash;55 students</option>
+                      <option value={1}>1&ndash;8 students/y</option>
+                      <option value={2}>9&ndash;16 students/y</option>
+                      <option value={3}>17&ndash;24 students/y</option>
+                      <option value={4}>25&ndash;32 students/y</option>
+                      <option value={5}>33&ndash;40 students/y</option>
+                      <option value={6}>41&ndash;48 students/y</option>
+                      <option value={7}>49&ndash;55 students/y</option>
                     </select>
                     <button
                       type="button"
                       onClick={() => removeCourse(name as CourseName)}
+                      aria-label="Remove"
+                      title="Remove"
                     >
                       ❌
                     </button>
@@ -319,19 +341,21 @@ export default function Home() {
               onChange={(e) => setCurrentMultiplier(+e.target.value)}
               disabled={availableList.length === 0}
             >
-              <option value={1}>1&ndash;8 students</option>
-              <option value={2}>9&ndash;16 students</option>
-              <option value={3}>17&ndash;24 students</option>
-              <option value={4}>25&ndash;32 students</option>
-              <option value={5}>33&ndash;40 students</option>
-              <option value={6}>41&ndash;48 students</option>
-              <option value={7}>49&ndash;55 students</option>
+              <option value={1}>1&ndash;8 students/y</option>
+              <option value={2}>9&ndash;16 students/y</option>
+              <option value={3}>17&ndash;24 students/y</option>
+              <option value={4}>25&ndash;32 students/y</option>
+              <option value={5}>33&ndash;40 students/y</option>
+              <option value={6}>41&ndash;48 students/y</option>
+              <option value={7}>49&ndash;55 students/y</option>
             </select>
             {availableList.length !== 0 && (
               <button
                 type="button"
                 onClick={addCourse}
                 disabled={availableList.length === 0}
+                aria-label="Add Course"
+                title="Add Course"
               >
                 ➕
               </button>
@@ -434,29 +458,29 @@ export default function Home() {
         <hr />
         <h2>Some Complete Sets</h2>
         <ul>
-          <li>48 Academic Exercise</li>
           <li>24 Archaeology + 8 Money Wangling + 24 Scientography</li>
+          <li>16 Dark Art + 16 Wizardry</li>
+          <li>24 Gastronomy + 8 Money Wangling + 8 General Knowledge</li>
+          <li>24 Internet History + 8 General Knowledge</li>
+          <li>24 Robotics + 8 General Knowledge</li>
+          <li>16 School of Thought + 16 Internet History + 16 Funny Business</li>
+          <li>16 Scientography + 8 Funny Business</li>
+          <li>8 Virtual Normality + 8 General Knowledge</li>
+          <li>48 Academic Exercise</li>
           <li>48 Archaeology</li>
           <li>24 Countercultural Studies</li>
-          <li>16 Dark Art + 16 Wizardry</li>
           <li>24 Dark Art</li>
           <li>24 Funny Business</li>
-          <li>24 Gastronomy + 8 Money Wangling + 8 General Knowledge</li>
           <li>48 Gastronomy</li>
           <li>16 General Knowledge</li>
-          <li>24 Internet History + 8 General Knowledge</li>
           <li>48 Internet History</li>
           <li>48 Knight School</li>
           <li>16 Money Wangling</li>
           <li>48 Musicality</li>
-          <li>24 Robotics + 8 General Knowledge</li>
           <li>48 Robotics</li>
-          <li>16 School of Thought + 16 Internet History + 16 Funny Business</li>
           <li>48 School of Thought</li>
-          <li>16 Scientography + 8 Funny Business</li>
           <li>48 Scientography</li>
           <li>48 Spy School</li>
-          <li>8 Virtual Normality + 8 General Knowledge</li>
           <li>16 Virtual Normality</li>
           <li>48 Wizardry</li>
         </ul>
