@@ -466,6 +466,17 @@ export default function Home() {
           <li>24 Robotics + 8 General Knowledge</li>
           <li>16 School of Thought + 16 Internet History + 16 Funny Business</li>
           <li>16 Scientography + 8 Funny Business</li>
+          <li>
+            32 Spy School + 16 Archaeology + 16 Scientography (
+            <a
+              href="https://github.com/rootEnginear/tpc-course-planner/discussions/1"
+              target="_blank"
+              rel="nofollow noopener noreferrer"
+            >
+              by whowantblood
+            </a>
+            )
+          </li>
           <li>8 Virtual Normality + 8 General Knowledge</li>
           <li>48 Academic Exercise</li>
           <li>48 Archaeology</li>
@@ -487,10 +498,9 @@ export default function Home() {
         </ul>
         <p>
           Some courses, such as &ldquo;Academic Exercise&rdquo;, &ldquo;Knight
-          School&rdquo;, &ldquo;Musicality&rdquo;, and &ldquo;Spy School&rdquo;,
-          don&apos;t fare well with other courses because they have some left-over slots
-          that are difficult to fit with other courses. But let me know if you can crack
-          the code!
+          School&rdquo;, and &ldquo;Musicality&rdquo;, don&apos;t fare well with other
+          courses because they have some left-over slots that are difficult to fit with
+          other courses. But let me know if you can crack the code!
         </p>
       </main>
       <hr />
