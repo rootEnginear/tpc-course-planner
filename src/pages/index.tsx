@@ -465,17 +465,50 @@ export default function Home() {
           <li>24 Internet History + 8 General Knowledge</li>
           <li>24 Robotics + 8 General Knowledge</li>
           <li>16 School of Thought + 16 Internet History + 16 Funny Business</li>
+          <li>
+            16 School of Thought + 16 Internet History + 16 Virtual Normality + 16
+            Scientography{" "}
+            <span className="whitespace-nowrap">
+              (
+              <a
+                href="https://www.reddit.com/r/TwoPointCampus/comments/120usyx/comment/jjbc3n9/"
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+              >
+                by Vasbyt-XXI
+              </a>
+              )
+            </span>
+          </li>
+          <li>
+            16 School of Thought + 16 Internet History + 8 Funny Business + 8
+            Scientography + 24 Gastronomy{" "}
+            <span className="whitespace-nowrap">
+              (
+              <a
+                href="https://www.reddit.com/r/TwoPointCampus/comments/120usyx/comment/jjbc3n9/"
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+              >
+                by Vasbyt-XXI
+              </a>
+              )
+            </span>
+          </li>
           <li>16 Scientography + 8 Funny Business</li>
           <li>
-            32 Spy School + 16 Archaeology + 16 Scientography (
-            <a
-              href="https://github.com/rootEnginear/tpc-course-planner/discussions/1"
-              target="_blank"
-              rel="nofollow noopener noreferrer"
-            >
-              by whowantblood
-            </a>
-            )
+            32 Spy School + 16 Archaeology + 16 Scientography{" "}
+            <span className="whitespace-nowrap">
+              (
+              <a
+                href="https://github.com/rootEnginear/tpc-course-planner/discussions/1"
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+              >
+                by whowantblood
+              </a>
+              )
+            </span>
           </li>
           <li>8 Virtual Normality + 8 General Knowledge</li>
           <li>48 Academic Exercise</li>

@@ -27,7 +27,7 @@ hr {
 }
 
 ul {
-  @apply mb-8 list-inside list-disc;
+  @apply mb-8 ml-[2ch] list-disc;
 }
 
 button:not(.link),
