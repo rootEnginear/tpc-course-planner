@@ -1,9 +1,13 @@
 import { PartialRecord } from "@/utils/partialrecord";
 
 export const ROOM_NAME = [
+  "Anti-Gravity Chamber",
   "Battle Ground",
+  "Battle Space",
   "Cheeseball Field",
+  "Command Room",
   "Computer Lab",
+  "Creamatorium",
   "Detection Office",
   "Dig Site",
   "Gadget Lab",
@@ -11,11 +15,13 @@ export const ROOM_NAME = [
   "Gym",
   "Jousting Field",
   "Lecture Theater",
+  "Living Room",
   "Panic Room",
   "Potions Room",
   "Recording Studio",
   "Robo Construction",
   "Robo Design",
+  "Rocket Lab",
   "Savoury Kitchen",
   "Science Lab",
   "Spells Room",
@@ -28,11 +34,15 @@ export type RoomName = (typeof ROOM_NAME)[number];
 export const COURSE_NAME = [
   "Academic Exercise",
   "Archaeology",
+  "Astrology",
+  "Cheese-Moongery",
+  "Cosmic Expansion",
   "Countercultural Studies",
   "Dark Art",
   "Funny Business",
   "Gastronomy",
   "General Knowledge",
+  "Humanities",
   "Internet History",
   "Knight School",
   "Money Wangling",
@@ -42,6 +52,8 @@ export const COURSE_NAME = [
   "School of Thought",
   "School Spirits",
   "Scientography",
+  "Space Academy",
+  "Space-Knight School",
   "Spy School",
   "Virtual Normality",
   "Wizardry",
@@ -505,6 +517,150 @@ export const COURSES: Course = {
         "Lecture Theater": 2,
         "Potions Room": 4,
         "Spells Room": 3,
+      },
+    },
+    years: 3,
+  },
+  Astrology: {
+    class: {
+      per_year: [
+        {
+          "Lecture Theater": 1,
+          "Anti-Gravity Chamber": 2,
+        },
+        {
+          "Lecture Theater": 1,
+          "Anti-Gravity Chamber": 1,
+          "Rocket Lab": 1,
+        },
+        {
+          "Anti-Gravity Chamber": 1,
+          "Rocket Lab": 1,
+          Gym: 1,
+        },
+      ],
+      total: {
+        "Lecture Theater": 2,
+        "Anti-Gravity Chamber": 4,
+        "Rocket Lab": 2,
+        Gym: 1,
+      },
+    },
+    years: 3,
+  },
+  "Cheese-Moongery": {
+    class: {
+      per_year: [
+        {
+          Creamatorium: 2,
+          "Science Lab": 1,
+        },
+        {
+          Creamatorium: 2,
+          "Science Lab": 1,
+        },
+        {
+          Creamatorium: 2,
+          "Science Lab": 1,
+        },
+      ],
+      total: {
+        Creamatorium: 6,
+        "Science Lab": 3,
+      },
+    },
+    years: 3,
+  },
+  "Cosmic Expansion": {
+    class: {
+      per_year: [
+        {
+          "Lecture Theater": 2,
+          "Rocket Lab": 1,
+        },
+        {
+          "Lecture Theater": 1,
+          "Rocket Lab": 2,
+        },
+      ],
+      total: {
+        "Lecture Theater": 3,
+        "Rocket Lab": 3,
+      },
+    },
+    years: 2,
+  },
+  Humanities: {
+    class: {
+      per_year: [
+        {
+          "Lecture Theater": 1,
+          "Living Room": 2,
+        },
+        {
+          "Lecture Theater": 1,
+          "Living Room": 1,
+          "Computer Lab": 1,
+        },
+        {
+          "Living Room": 2,
+          "Computer Lab": 1,
+        },
+      ],
+      total: {
+        "Lecture Theater": 2,
+        "Living Room": 5,
+        "Computer Lab": 2,
+      },
+    },
+    years: 3,
+  },
+  "Space Academy": {
+    class: {
+      per_year: [
+        {
+          "Lecture Theater": 1,
+          "Command Room": 2,
+        },
+        {
+          "Command Room": 2,
+          "Battle Space": 1,
+        },
+        {
+          "Lecture Theater": 1,
+          "Command Room": 1,
+          "Battle Space": 1,
+        },
+      ],
+      total: {
+        "Lecture Theater": 2,
+        "Command Room": 5,
+        "Battle Space": 2,
+      },
+    },
+    years: 3,
+  },
+  "Space-Knight School": {
+    class: {
+      per_year: [
+        {
+          "Lecture Theater": 1,
+          "Battle Space": 2,
+        },
+        {
+          "Battle Space": 2,
+          Gym: 1,
+        },
+        {
+          "Lecture Theater": 1,
+          "Battle Space": 1,
+          Gym: 1,
+        },
+      ],
+      total: {
+        "Lecture Theater": 2,
+        "Battle Space": 5,
+        Gym: 2,
       },
     },
     years: 3,
