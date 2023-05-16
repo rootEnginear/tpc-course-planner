@@ -4,8 +4,10 @@ export const ROOM_NAME = [
   "Battle Ground",
   "Cheeseball Field",
   "Computer Lab",
+  "Detection Office",
   "Dig Site",
   "Gadget Lab",
+  "Ghost Storage",
   "Gym",
   "Jousting Field",
   "Lecture Theater",
@@ -35,8 +37,10 @@ export const COURSE_NAME = [
   "Knight School",
   "Money Wangling",
   "Musicality",
+  "Paranormal Detection",
   "Robotics",
   "School of Thought",
+  "School Spirits",
   "Scientography",
   "Spy School",
   "Virtual Normality",
@@ -294,6 +298,56 @@ export const COURSES: Course = {
         "Lecture Theater": 3,
         "Recording Studio": 5,
         "Computer Lab": 1,
+      },
+    },
+    years: 3,
+  },
+  "Paranormal Detection": {
+    class: {
+      per_year: [
+        {
+          "Lecture Theater": 1,
+          "Detection Office": 2,
+        },
+        {
+          "Lecture Theater": 1,
+          "Detection Office": 1,
+          "Ghost Storage": 1,
+        },
+        {
+          "Detection Office": 1,
+          "Ghost Storage": 2,
+        },
+      ],
+      total: {
+        "Lecture Theater": 2,
+        "Detection Office": 4,
+        "Ghost Storage": 3,
+      },
+    },
+    years: 3,
+  },
+  "School Spirits": {
+    class: {
+      per_year: [
+        {
+          "Lecture Theater": 2,
+          "Science Lab": 1,
+        },
+        {
+          "Lecture Theater": 2,
+          "Computer Lab": 1,
+        },
+        {
+          "Lecture Theater": 1,
+          "Science Lab": 1,
+          "Computer Lab": 1,
+        },
+      ],
+      total: {
+        "Lecture Theater": 5,
+        "Science Lab": 2,
+        "Computer Lab": 2,
       },
     },
     years: 3,
