@@ -528,10 +528,18 @@ export default function Home() {
           <li>48 Spy School</li>
           <li>16 Virtual Normality</li>
           <li>48 Wizardry</li>
+          <li>48 Astrology</li>
+          <li>16 Cheese-Moongery</li>
+          <li>16 Cosmic Expansion</li>
+          <li>48 Humanities</li>
+          <li>48 Space Academy</li>
+          <li>48 Space-Knight School</li>
+          <li>48 Paranormal Detection</li>
+          <li>48 School Spirit</li>
         </ul>
         <p>
           Some courses, such as &ldquo;Academic Exercise&rdquo;, &ldquo;Knight
-          School&rdquo;, and &ldquo;Musicality&rdquo;, don&apos;t fare well with other
+          School&rdquo;, &ldquo;Musicality&rdquo;, etc., don&apos;t fare well with other
           courses because they have some left-over slots that are difficult to fit with
           other courses. But let me know if you can crack the code!
         </p>
