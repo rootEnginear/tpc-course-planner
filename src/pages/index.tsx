@@ -511,31 +511,35 @@ export default function Home() {
             </span>
           </li>
           <li>8 Virtual Normality + 8 General Knowledge</li>
+        </ul>
+        <hr />
+        <h2>Course&apos;s Self-Closing Amount</h2>
+        <ul>
           <li>48 Academic Exercise</li>
           <li>48 Archaeology</li>
+          <li>48 Astrology</li>
+          <li>16 Cheese-Moongery</li>
+          <li>16 Cosmic Expansion</li>
           <li>24 Countercultural Studies</li>
           <li>24 Dark Art</li>
           <li>24 Funny Business</li>
           <li>48 Gastronomy</li>
           <li>16 General Knowledge</li>
+          <li>48 Humanities</li>
           <li>48 Internet History</li>
           <li>48 Knight School</li>
           <li>16 Money Wangling</li>
           <li>48 Musicality</li>
+          <li>48 Paranormal Detection</li>
           <li>48 Robotics</li>
           <li>48 School of Thought</li>
+          <li>48 School Spirit</li>
           <li>48 Scientography</li>
+          <li>48 Space Academy</li>
+          <li>48 Space-Knight School</li>
           <li>48 Spy School</li>
           <li>16 Virtual Normality</li>
           <li>48 Wizardry</li>
-          <li>48 Astrology</li>
-          <li>16 Cheese-Moongery</li>
-          <li>16 Cosmic Expansion</li>
-          <li>48 Humanities</li>
-          <li>48 Space Academy</li>
-          <li>48 Space-Knight School</li>
-          <li>48 Paranormal Detection</li>
-          <li>48 School Spirit</li>
         </ul>
         <p>
           Some courses, such as &ldquo;Academic Exercise&rdquo;, &ldquo;Knight
