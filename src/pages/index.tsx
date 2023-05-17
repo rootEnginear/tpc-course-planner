@@ -511,6 +511,7 @@ export default function Home() {
             </span>
           </li>
           <li>8 Virtual Normality + 8 General Knowledge</li>
+          <li>24 Academic Exercise + 24 Astrology (by whowantblood)</li>
         </ul>
         <hr />
         <h2>Course&apos;s Self-Closing Amount</h2>
@@ -542,10 +543,9 @@ export default function Home() {
           <li>48 Wizardry</li>
         </ul>
         <p>
-          Some courses, such as &ldquo;Academic Exercise&rdquo;, &ldquo;Knight
-          School&rdquo;, &ldquo;Musicality&rdquo;, etc., don&apos;t fare well with other
-          courses because they have some left-over slots that are difficult to fit with
-          other courses. But let me know if you can crack the code!
+          Some courses, such as Knight School and Musicality, don&apos;t fare well with
+          other courses because they have some left-over slots that are difficult to fit
+          with other courses. But let me know if you can crack the code!
         </p>
       </main>
       <hr />
