@@ -512,6 +512,7 @@ export default function Home() {
           </li>
           <li>8 Virtual Normality + 8 General Knowledge</li>
           <li>24 Academic Exercise + 24 Astrology (by whowantblood)</li>
+          <li>16 Spy School + 8 Funny Business + 16 School Spirits</li>
         </ul>
         <hr />
         <h2>Course&apos;s Self-Closing Amount</h2>
