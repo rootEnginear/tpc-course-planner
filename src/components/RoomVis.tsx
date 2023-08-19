@@ -1,6 +1,22 @@
-export default function RoomVis({ slots }: { slots: number }) {
-  const reminded_slots = slots % 6;
+interface RoomVisProps {
+  slots: number;
+  medical?: boolean;
+}
+
+export default function RoomVis({ slots, medical }: RoomVisProps) {
   const full_slots = Math.floor(slots / 6);
+
+  if (medical)
+    return (
+      <span>
+        <span className="mr-8">{"🟩".repeat(full_slots)}</span>
+        <span className="whitespace-nowrap">
+          {full_slots} slot{full_slots > 1 && "s"}
+        </span>
+      </span>
+    );
+
+  const reminded_slots = slots % 6;
 
   return (
     <span>

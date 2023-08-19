@@ -1,6 +1,15 @@
 import { PartialRecord } from "@/utils/partialrecord";
 
-export const ROOM_NAME = [
+export const MEDICAL_ROOM = [
+  "Head Clinic",
+  "Injection Room",
+  "Psychiatry",
+  "Surgery",
+  "Thumping Therapy",
+  "Ward",
+];
+
+const ROOM_NAME = [
   "Anti-Gravity Chamber",
   "Battle Ground",
   "Battle Space",
@@ -13,11 +22,14 @@ export const ROOM_NAME = [
   "Gadget Lab",
   "Ghost Storage",
   "Gym",
+  "Head Clinic",
+  "Injection Room",
   "Jousting Field",
   "Lecture Theater",
   "Living Room",
   "Panic Room",
   "Potions Room",
+  "Psychiatry",
   "Recording Studio",
   "Robo Construction",
   "Robo Design",
@@ -25,11 +37,16 @@ export const ROOM_NAME = [
   "Savoury Kitchen",
   "Science Lab",
   "Spells Room",
+  "Surgery",
   "Sweet Kitchen",
+  "Thumping Therapy",
   "VR Lab",
+  "Ward",
 ] as const;
 
 export type RoomName = (typeof ROOM_NAME)[number];
+
+export const MEDICAL_COURSE_NAME = ["Medical School", "Nursing"];
 
 export const COURSE_NAME = [
   "Academic Exercise",
@@ -45,8 +62,10 @@ export const COURSE_NAME = [
   "Humanities",
   "Internet History",
   "Knight School",
+  "Medical School",
   "Money Wangling",
   "Musicality",
+  "Nursing",
   "Paranormal Detection",
   "Robotics",
   "School of Thought",
@@ -270,6 +289,33 @@ export const COURSES: Course = {
     },
     years: 3,
   },
+  "Medical School": {
+    class: {
+      per_year: [
+        {
+          "Head Clinic": 6,
+          Psychiatry: 6,
+          Surgery: 6,
+        },
+        {
+          "Head Clinic": 6,
+          Psychiatry: 6,
+          Surgery: 6,
+        },
+        {
+          "Head Clinic": 6,
+          Psychiatry: 6,
+          Surgery: 6,
+        },
+      ],
+      total: {
+        "Head Clinic": 18,
+        Psychiatry: 18,
+        Surgery: 18,
+      },
+    },
+    years: 3,
+  },
   "Money Wangling": {
     class: {
       per_year: [
@@ -310,6 +356,33 @@ export const COURSES: Course = {
         "Lecture Theater": 3,
         "Recording Studio": 5,
         "Computer Lab": 1,
+      },
+    },
+    years: 3,
+  },
+  Nursing: {
+    class: {
+      per_year: [
+        {
+          "Injection Room": 6,
+          "Thumping Therapy": 6,
+          Ward: 6,
+        },
+        {
+          "Injection Room": 6,
+          "Thumping Therapy": 6,
+          Ward: 6,
+        },
+        {
+          "Injection Room": 6,
+          "Thumping Therapy": 6,
+          Ward: 6,
+        },
+      ],
+      total: {
+        "Injection Room": 18,
+        "Thumping Therapy": 18,
+        Ward: 18,
       },
     },
     years: 3,
@@ -684,4 +757,19 @@ export const COURSE_LEVEL_DATA_BY_STUDENTS: CourseLevelData[] = [
   [7, [145, 185, 225, 265], 40], // 40
   [9, [230, 280, 330, 380], 50], // 48
   [10, [280, 335, 390, 445], 55], // 55
+];
+
+export const MEDICAL_COURSE_LEVEL_DATA_BY_STUDENTS = [
+  [0, 0, 0],
+  [1, 30, 0], // 3
+  [1, 30, 0], // 6
+  [2, 50, 0], // 9
+  [3, 75, 0], // 12
+  [4, 105, 0], // 15
+  [5, 140, 0], // 18
+  [6, 180, 0], // 21
+  [7, 225, 0], // 24
+  [8, 275, 0], // 27
+  [9, 330, 0], // 30
+  [10, 390, 0], // 33
 ];

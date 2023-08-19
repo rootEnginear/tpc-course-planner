@@ -10,6 +10,9 @@ import {
   COURSE_NAME,
   RoomName,
   COURSE_LEVEL_DATA_BY_STUDENTS,
+  MEDICAL_COURSE_LEVEL_DATA_BY_STUDENTS,
+  MEDICAL_COURSE_NAME,
+  MEDICAL_ROOM,
 } from "@/data/courses";
 import { PartialRecord } from "@/utils/partialrecord";
 
@@ -60,13 +63,20 @@ export default function Home() {
       Object.entries(selectedCourse).reduce(
         (a, [name, multiplier]) => {
           const course_year = COURSES[name as CourseName].years;
-          const cost =
-            a[0] + COURSE_LEVEL_DATA_BY_STUDENTS[multiplier][1][course_year - 1 ?? 0];
-          const lowestStudent = Math.max(
-            a[1] + ((multiplier - 1) * 8 + 1) * course_year,
-            0
-          );
-          const highestStudent = a[2] + multiplier * 8 * course_year;
+
+          let cost = a[0];
+          let lowestStudent = a[1];
+          let highestStudent = a[2];
+
+          if (MEDICAL_COURSE_NAME.includes(name)) {
+            cost += MEDICAL_COURSE_LEVEL_DATA_BY_STUDENTS[multiplier][1];
+            lowestStudent = Math.max(a[1] + ((multiplier - 1) * 3 + 1) * 3, 0);
+            highestStudent += multiplier * 3 * 3;
+          } else {
+            cost += COURSE_LEVEL_DATA_BY_STUDENTS[multiplier][1][course_year - 1 ?? 0];
+            lowestStudent = Math.max(a[1] + ((multiplier - 1) * 8 + 1) * course_year, 0);
+            highestStudent += multiplier * 8 * course_year;
+          }
 
           return [cost, lowestStudent, highestStudent];
         },
@@ -242,12 +252,15 @@ export default function Home() {
                     height="16"
                   />
                   <span className="text-sm font-normal">
-                    {COURSE_LEVEL_DATA_BY_STUDENTS[multiplier][0]} |{" "}
-                    {
-                      COURSE_LEVEL_DATA_BY_STUDENTS[multiplier][1][
-                        COURSES[name as CourseName].years - 1 ?? 0
-                      ]
-                    }
+                    {MEDICAL_COURSE_NAME.includes(name)
+                      ? MEDICAL_COURSE_LEVEL_DATA_BY_STUDENTS[multiplier][0]
+                      : COURSE_LEVEL_DATA_BY_STUDENTS[multiplier][0]}{" "}
+                    |{" "}
+                    {MEDICAL_COURSE_NAME.includes(name)
+                      ? MEDICAL_COURSE_LEVEL_DATA_BY_STUDENTS[multiplier][1]
+                      : COURSE_LEVEL_DATA_BY_STUDENTS[multiplier][1][
+                          COURSES[name as CourseName].years - 1 ?? 0
+                        ]}
                   </span>
                   <Image
                     className="mr-4 inline-block"
@@ -265,13 +278,39 @@ export default function Home() {
                       }
                     >
                       <option value={0}>0 student (Hide)</option>
-                      <option value={1}>1&ndash;8 students/y</option>
-                      <option value={2}>9&ndash;16 students/y</option>
-                      <option value={3}>17&ndash;24 students/y</option>
-                      <option value={4}>25&ndash;32 students/y</option>
-                      <option value={5}>33&ndash;40 students/y</option>
-                      <option value={6}>41&ndash;48 students/y</option>
-                      <option value={7}>49&ndash;55 students/y</option>
+                      <option value={1}>
+                        {MEDICAL_COURSE_NAME.includes(name) ? "1–3" : "1–8"} students/y
+                      </option>
+                      <option value={2}>
+                        {MEDICAL_COURSE_NAME.includes(name) ? "4–6" : "9–16"} students/y
+                      </option>
+                      <option value={3}>
+                        {MEDICAL_COURSE_NAME.includes(name) ? "7–9" : "17–24"} students/y
+                      </option>
+                      <option value={4}>
+                        {MEDICAL_COURSE_NAME.includes(name) ? "10–12" : "25–32"}{" "}
+                        students/y
+                      </option>
+                      <option value={5}>
+                        {MEDICAL_COURSE_NAME.includes(name) ? "13–15" : "33–40"}{" "}
+                        students/y
+                      </option>
+                      <option value={6}>
+                        {MEDICAL_COURSE_NAME.includes(name) ? "16–18" : "41–48"}{" "}
+                        students/y
+                      </option>
+                      <option value={7}>
+                        {MEDICAL_COURSE_NAME.includes(name) ? "19–21" : "49–55"}{" "}
+                        students/y
+                      </option>
+                      {MEDICAL_COURSE_NAME.includes(name) && (
+                        <>
+                          <option value={8}>22–24 students/y</option>
+                          <option value={9}>25–27 students/y</option>
+                          <option value={10}>28–30 students/y</option>
+                          <option value={11}>31–33 students/y</option>
+                        </>
+                      )}
                     </select>
                     <button
                       type="button"
@@ -341,13 +380,57 @@ export default function Home() {
               onChange={(e) => setCurrentMultiplier(+e.target.value)}
               disabled={availableList.length === 0}
             >
-              <option value={1}>1&ndash;8 students/y</option>
-              <option value={2}>9&ndash;16 students/y</option>
-              <option value={3}>17&ndash;24 students/y</option>
-              <option value={4}>25&ndash;32 students/y</option>
-              <option value={5}>33&ndash;40 students/y</option>
-              <option value={6}>41&ndash;48 students/y</option>
-              <option value={7}>49&ndash;55 students/y</option>
+              <option value={0}>0 student (Hide)</option>
+              <option value={1}>
+                {MEDICAL_COURSE_NAME.includes(currentSelectedCourse ?? "")
+                  ? "1–3"
+                  : "1–8"}{" "}
+                students/y
+              </option>
+              <option value={2}>
+                {MEDICAL_COURSE_NAME.includes(currentSelectedCourse ?? "")
+                  ? "4–6"
+                  : "9–16"}{" "}
+                students/y
+              </option>
+              <option value={3}>
+                {MEDICAL_COURSE_NAME.includes(currentSelectedCourse ?? "")
+                  ? "7–9"
+                  : "17–24"}{" "}
+                students/y
+              </option>
+              <option value={4}>
+                {MEDICAL_COURSE_NAME.includes(currentSelectedCourse ?? "")
+                  ? "10–12"
+                  : "25–32"}{" "}
+                students/y
+              </option>
+              <option value={5}>
+                {MEDICAL_COURSE_NAME.includes(currentSelectedCourse ?? "")
+                  ? "13–15"
+                  : "33–40"}{" "}
+                students/y
+              </option>
+              <option value={6}>
+                {MEDICAL_COURSE_NAME.includes(currentSelectedCourse ?? "")
+                  ? "16–18"
+                  : "41–48"}{" "}
+                students/y
+              </option>
+              <option value={7}>
+                {MEDICAL_COURSE_NAME.includes(currentSelectedCourse ?? "")
+                  ? "19–21"
+                  : "49–55"}{" "}
+                students/y
+              </option>
+              {MEDICAL_COURSE_NAME.includes(currentSelectedCourse ?? "") && (
+                <>
+                  <option value={8}>22–24 students/y</option>
+                  <option value={9}>25–27 students/y</option>
+                  <option value={10}>28–30 students/y</option>
+                  <option value={11}>31–33 students/y</option>
+                </>
+              )}
             </select>
             {availableList.length !== 0 && (
               <button
@@ -389,7 +472,10 @@ export default function Home() {
                       />
                       {name}
                     </span>
-                    <RoomVis slots={val * currentMultiplier} />
+                    <RoomVis
+                      slots={val * currentMultiplier}
+                      medical={MEDICAL_ROOM.includes(name)}
+                    />
                   </Fragment>
                 )
               )}
@@ -423,7 +509,7 @@ export default function Home() {
                     </span>
                   </span>
                   <span>&times;{Math.ceil(slotNumber / 6)}</span>
-                  <RoomVis slots={slotNumber} />
+                  <RoomVis slots={slotNumber} medical={MEDICAL_ROOM.includes(roomName)} />
                 </Fragment>
               ))}
           </div>
