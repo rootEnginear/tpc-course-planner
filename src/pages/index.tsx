@@ -170,18 +170,6 @@ export default function Home() {
           </a>
           .
         </p>
-        <details>
-          <summary>
-            <span className="font-bold">
-              Why is the number of students a multiple of 8?
-            </span>
-          </summary>
-          In short, the maximum class size is 8. — If you have 9 students, you will
-          require an additional room that can accommodate up to 16 students. So it&apos;s
-          a good idea to take advantage of this to maximize your profit. Also, you can set
-          the student intake to 0 in the game if you don&apos;t want to take any more
-          students or shut down the course.
-        </details>
       </header>
       <hr />
       <main>
@@ -337,7 +325,10 @@ export default function Home() {
                         />
                         {name}
                       </span>
-                      <RoomVis slots={val * multiplier} />
+                      <RoomVis
+                        slots={val * multiplier}
+                        medical={MEDICAL_ROOM.includes(name)}
+                      />
                     </Fragment>
                   )
                 )}
@@ -541,6 +532,109 @@ export default function Home() {
             ))}
           </ul>
         </div>
+        <hr />
+        <h2>FAQ</h2>
+        <details>
+          <summary>
+            <span className="font-bold">
+              Why is the number of students a multiple of 8?
+            </span>
+          </summary>
+          <p>
+            In short, the maximum class size is 8. — If you have 9 students, you will
+            require an additional room that can accommodate up to 16 students. So
+            it&apos;s a good idea to take advantage of this to maximize your profit. Also,
+            you can set the student intake to 0 in the game if you don&apos;t want to take
+            any more students or shut down the course.
+          </p>
+        </details>
+        <details>
+          <summary>
+            <span className="font-bold">
+              What is the difference between &ldquo;Slots&rdquo; and &ldquo;Rooms&rdquo;
+            </span>
+          </summary>
+          <p>
+            <strong>Slots</strong> are basically a period for 1 class.{" "}
+            <strong>A room</strong> can have at most 6 slots (periods).
+          </p>
+          <p>
+            For example, General Knowledge is a 1-year course that has 3 classes that need
+            Lecture Theater.
+          </p>
+          <ul>
+            <li>
+              If you have 1-8 students, it will take 3 slots out of 6 from 1 Lecture
+              Theater.
+            </li>
+            <li>
+              If you have 9-16 students, it will take 6 slots out of 6 from 1 Lecture
+              Theater.
+            </li>
+            <li>
+              If you have 17-24 students, it will need 9 slots (which split into 6+3
+              slots) from 2 Lecture Theaters.
+            </li>
+          </ul>
+          <p>
+            This calculation also scales up with the amount of year of the course. For
+            example, Money Wangling is a 2-year course that need Lecture Theater and
+            Computer Lab.
+          </p>
+          <ul>
+            <li>
+              If you have 1-8 students for each year, it will take 3 slots out of 6 from
+              both 1 Lecture Theater and 1 Computer Lab.
+            </li>
+            <li>
+              If you have 9-16 students for each year, it will take 6 slots out of 6 from
+              both 1 Lecture Theater and 1 Computer Lab.
+            </li>
+            <li>
+              If you have 17-24 students for each year, it will need 9 slots (which split
+              into 6+3 slots) from both 2 Lecture Theaters and 2 Computer Labs.
+            </li>
+          </ul>
+          <p>
+            As stated in the introduction, in practice, you might have to fight with your
+            timetable scheduler to get the slots filled perfectly.
+          </p>
+        </details>
+        <details>
+          <summary>
+            <span className="font-bold">Medical School?</span>
+          </summary>
+          <p>According to Two Point Campus Wiki:</p>
+          <blockquote cite="https://two-point-campus.fandom.com/wiki/Medical_School#:~:text=Medical%20School%20Students%20do%20not%20attend%20a%20regular%20Class%20schedule%2C%20as%20is%20the%20norm%20for%20other%20Courses.%20Instead%2C%20three%20Doctors%20will%20observe%2C%20or%20take%20part%20in%2C%20Patient%20Treatment%20being%20administerd%20by%20a%20Teacher%20with%20the%20Medical%20School%20Qualification%2C%20in%20the%20Head%20Clinic%2C%20Psychiatry%20or%20Surgery.">
+            <p>
+              Medical School Students do not attend a regular Class schedule, as is the
+              norm for other Courses. Instead, three Doctors will observe, or take part
+              in, Patient Treatment being administerd by a Teacher with the Medical School
+              Qualification, in the Head Clinic, Psychiatry or Surgery.
+            </p>
+            <footer>
+              — <cite>Medical School Course, Two Point Campus Wiki</cite>
+            </footer>
+          </blockquote>
+          <blockquote cite="https://two-point-campus.fandom.com/wiki/Nursing#:~:text=There%20is%20no%20set%20Timetable%20for%20this%20Course%2C%20and%20thus%20no%20scheduled%20Classes.%20The%20Students%20will%20instead%20observe%2C%20and%20participate%20in%20the%20treatment%20of%20Patients%2C%20which%20will%20provide%20them%20with%20tuition.">
+            <p>
+              There is no set Timetable for this Course, and thus no scheduled Classes.
+              The Students will instead observe, and participate in the treatment of
+              Patients, which will provide them with tuition.
+            </p>
+            <footer>
+              — <cite>Nursing Course, Two Point Campus Wiki</cite>
+            </footer>
+          </blockquote>
+          <p>
+            With this mechanic, the planner will <em>assume</em> that, at some point in
+            time, a group of 3 students may need to be in the same room. Hence, the
+            capacity per room is 3, not 8 like other rooms. And since there&apos;s no
+            fixed time frame, the classroom list will associate the room number with the
+            student&apos;s number rather than the timeslots itself. In practice, it should
+            be <em>somewhat less</em> than suggested.
+          </p>
+        </details>
         <hr />
         <h2>Some Complete Sets</h2>
         <ul>

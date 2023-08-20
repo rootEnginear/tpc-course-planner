@@ -52,6 +52,18 @@ a:focus {
   @apply outline-none outline-offset-0 ring;
 }
 
+blockquote {
+  @apply mb-8 border-l-2 border-l-gray-400 pl-8;
+}
+
+blockquote > footer {
+  @apply -mt-4 text-sm;
+}
+
+blockquote > footer > cite {
+  @apply not-italic;
+}
+
 details {
   @apply mb-8 rounded-md border-2 border-gray-800 p-8;
 }
@@ -84,6 +96,10 @@ details[open] > summary {
 
 details[open] > summary > span::before {
   @apply rotate-90;
+}
+
+details > :is(p, ul):last-child {
+  @apply mb-0;
 }
 
 @tailwind utilities;

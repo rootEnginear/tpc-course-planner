@@ -9,9 +9,9 @@ export default function RoomVis({ slots, medical }: RoomVisProps) {
   if (medical)
     return (
       <span>
-        <span className="mr-8">{"🟩".repeat(full_slots)}</span>
+        <span className="mr-8">{"🟦".repeat(full_slots)}</span>
         <span className="whitespace-nowrap">
-          {full_slots} slot{full_slots > 1 && "s"}
+          {full_slots} room{full_slots > 1 && "s"}
         </span>
       </span>
     );
