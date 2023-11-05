@@ -639,6 +639,10 @@ export default function Home() {
         <h2>Some Complete Sets</h2>
         <ul>
           <li>24 Archaeology + 8 Money Wangling + 24 Scientography</li>
+          <li>
+            16 Archaeology + 16 School Spirits{" "}
+            <span className="whitespace-nowrap">(by nategar)</span>
+          </li>
           <li>16 Dark Art + 16 Wizardry</li>
           <li>24 Gastronomy + 24 Scientography</li>
           <li>24 Gastronomy + 24 Archaeology + 8 Money Wangling</li>
@@ -691,8 +695,11 @@ export default function Home() {
             </span>
           </li>
           <li>8 Virtual Normality + 8 General Knowledge</li>
-          <li>24 Academic Exercise + 24 Astrology (by whowantblood)</li>
-          <li>16 Spy School + 8 Funny Business + 16 School Spirit</li>
+          <li>
+            24 Academic Exercise + 24 Astrology{" "}
+            <span className="whitespace-nowrap">(by whowantblood)</span>
+          </li>
+          <li>16 Spy School + 8 Funny Business + 16 School Spirits</li>
         </ul>
         <hr />
         <h2>Course&apos;s Self-Closing Amount</h2>
