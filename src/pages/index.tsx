@@ -336,7 +336,7 @@ export default function Home() {
             </details>
           ))
         ) : (
-          <div className="mb-8 rounded-md border-2 border-dashed border-gray-800 p-8 text-center">
+          <div className="mb-8 rounded-md border-2 border-dashed border-zinc-800 p-8 text-center dark:border-zinc-500">
             <span className="font-bold">No course added yet!</span>{" "}
             <span className="whitespace-nowrap">Add some course below.</span>
           </div>
@@ -505,13 +505,13 @@ export default function Home() {
               ))}
           </div>
         ) : (
-          <div className="mb-8 rounded-md border-2 border-dashed border-gray-800 p-8 text-center">
+          <div className="mb-8 rounded-md border-2 border-dashed border-zinc-800 p-8 text-center dark:border-zinc-500">
             <span className="font-bold">No room required!</span>{" "}
             <span className="whitespace-nowrap">Add some course above.</span>
           </div>
         )}
         <div
-          className={`fixed w-max max-w-[250px] rounded-md border-2 border-gray-800 bg-white p-8 text-right transition-opacity ${
+          className={`fixed w-max max-w-[250px] rounded-md border-2 border-zinc-800 bg-white p-8 text-right transition-opacity dark:border-zinc-500 ${
             tooltipInfo.show ? "opacity-100" : "pointer-events-none opacity-0"
           }`}
           ref={elTooltip}

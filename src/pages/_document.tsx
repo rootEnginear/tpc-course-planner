@@ -2,7 +2,7 @@ import { Head, Html, Main, NextScript } from "next/document";
 
 export default function Document() {
   return (
-    <Html lang="en">
+    <Html lang="en-US">
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
@@ -31,6 +31,7 @@ export default function Document() {
           color="#ed891a"
         />
         <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="color-scheme" content="light dark" />
       </Head>
       <body className="mx-auto max-w-[75ch] p-16 md:py-32">
         <Main />
